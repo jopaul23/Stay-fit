@@ -17,7 +17,7 @@ class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      home: ProgressPage(),
+      home: ChatScreen(),
     );
   }
 }
