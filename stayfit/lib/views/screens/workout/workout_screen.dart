@@ -6,20 +6,20 @@ import 'package:lottie/lottie.dart';
 import 'package:stayfit/views/screens/workout/individual_workout.dart';
 import 'package:stayfit/views/screens/workout/tts.dart';
 
-class Screen1 extends StatefulWidget {
-  const Screen1({Key? key}) : super(key: key);
+class WorkoutScreen extends StatefulWidget {
+  const WorkoutScreen({Key? key}) : super(key: key);
 
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<WorkoutScreen> createState() => _WorkoutScreenState();
 }
 
-class _Screen1State extends State<Screen1> {
+class _WorkoutScreenState extends State<WorkoutScreen> {
   List _items = [];
 
   // Fetch content from the json file
   Future<void> readJson(String? type) async {
     final String response =
-        await rootBundle.loadString('asset/initworkout.json');
+        await rootBundle.loadString('asset/lotties/initworkout.json');
     final data = await json.decode(response);
     setState(() {
       _items = data[type];
@@ -53,7 +53,7 @@ class _Screen1State extends State<Screen1> {
               ),
               Container(
                 child: Image.asset(
-                  "asset/Fitnessstats.gif",
+                  "asset/lotties/Fitnessstats.gif",
                   height: 160,
                   width: 400,
                 ),
@@ -91,7 +91,7 @@ class _Screen1State extends State<Screen1> {
                                     Container(
                                         height: 150,
                                         width: 100,
-                                        child: Lottie.asset('asset/' +
+                                        child: Lottie.asset('asset/lotties/' +
                                             _items[index + 1]['url'])),
                                     Padding(
                                       padding:

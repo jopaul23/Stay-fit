@@ -25,7 +25,7 @@ class _FullWorkoutState extends State<FullWorkout> {
   _FullWorkoutState(this.typeOf);
   Future<void> read(String? typeOf) async {
     final String response =
-        await rootBundle.loadString('asset/initworkout.json');
+        await rootBundle.loadString('asset/lotties/initworkout.json');
     final data = await json.decode(response);
     setState(() {
       _item = data[typeOf];
@@ -57,7 +57,8 @@ class _FullWorkoutState extends State<FullWorkout> {
                   Container(
                       width: MediaQuery.of(context).size.width * .8,
                       height: MediaQuery.of(context).size.height * .5,
-                      child: Lottie.asset("asset/" + _item[count]["url"])),
+                      child:
+                          Lottie.asset("asset/lotties/" + _item[count]["url"])),
                   // TextButton(
                   //     onPressed: () => {speak(_item[count]['detail'])},
                   //     child: Text("speak")),
