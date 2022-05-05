@@ -51,6 +51,8 @@ dependencies:
   permission_handler: ^9.2.0
   sqflite: ^2.0.2+1
   web_socket_channel: ^2.2.0
+  shared_preferences: ^2.0.13
+  geolocator: ^8.2.1
 
 dev_dependencies:
 

@@ -27,7 +27,7 @@ class Myapp extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       child: GetMaterialApp(
-        home: ChatScreen(),
+        home: MobileEntry(),
       ),
     );
   }

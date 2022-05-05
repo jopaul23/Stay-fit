@@ -102,7 +102,6 @@ class _OtpPageState extends State<OtpPage> {
                             mobile: widget.mobile,
                             countryCode: widget.countryCode,
                             otp: token);
-                        Get.to(SignupPage());
                       })
                 ]),
           ),

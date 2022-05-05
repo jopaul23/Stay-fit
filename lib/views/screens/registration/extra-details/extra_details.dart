@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:stayfit/api/register_api.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/home/home.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:stayfit/views/screens/registration/extra-details/bio_container.dart';
 import 'package:stayfit/views/screens/registration/extra-details/birthday_container.dart';
 import 'package:stayfit/views/screens/registration/extra-details/calender_overlay.dart';
@@ -24,8 +26,14 @@ class _SignupPageState extends State<SignupPage> {
   final heightController = TextEditingController();
   final weightController = TextEditingController();
   final bioCntroller = TextEditingController();
+  final hipCntroller = TextEditingController();
+  final waistCntroller = TextEditingController();
+  final neckCntroller = TextEditingController();
   DateTime? birthdayDate;
   String birthdayString = "";
+  String gender = "";
+  bool loading = false;
+  List<String> genders = ["male", "female", "other"];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -80,23 +88,22 @@ class _SignupPageState extends State<SignupPage> {
                         height: defaultPadding,
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: TextFieldCustom(
-                              keyboardType: TextInputType.number,
-                              hintText: "height(in cm)",
-                              textEditingController: heightController,
-                            ),
+                          TextFieldCustom(
+                            width: 160,
+                            keyboardType: TextInputType.number,
+                            hintText: "height(in cm)",
+                            textEditingController: heightController,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: defaultPadding * 2,
                           ),
-                          Expanded(
-                            child: TextFieldCustom(
-                              keyboardType: TextInputType.number,
-                              hintText: "weight(in kg)",
-                              textEditingController: weightController,
-                            ),
+                          TextFieldCustom(
+                            width: 160,
+                            keyboardType: TextInputType.number,
+                            hintText: "weight(in kg)",
+                            textEditingController: weightController,
                           ),
                         ],
                       ),
@@ -104,11 +111,52 @@ class _SignupPageState extends State<SignupPage> {
                         height: defaultPadding,
                       ),
                       DropDownCustom(
-                          items: ["male", "female", "other"],
-                          dropdownChanged: (value) {},
+                          items: genders,
+                          dropdownChanged: (value) {
+                            setState(() {
+                              gender = genders[value];
+                            });
+                          },
                           text: "gender"),
                       const SizedBox(
                         height: defaultPadding,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextFieldCustom(
+                            width: gender == "female" ? 100 : 160,
+                            keyboardType: TextInputType.number,
+                            hintText: "neck length(in cm)",
+                            textEditingController: neckCntroller,
+                          ),
+                          const SizedBox(
+                            height: defaultPadding,
+                          ),
+                          TextFieldCustom(
+                            width: gender == "female" ? 100 : 160,
+                            keyboardType: TextInputType.number,
+                            hintText: "waist(in cm)",
+                            textEditingController: waistCntroller,
+                          ),
+                          if (gender == "female")
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  height: defaultPadding,
+                                ),
+                                TextFieldCustom(
+                                  width: 100,
+                                  keyboardType: TextInputType.number,
+                                  hintText: "hip(in cm)",
+                                  textEditingController: hipCntroller,
+                                ),
+                              ],
+                            )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: defaultPadding * 2,
                       ),
                       BioField(
                         textEditingController: bioCntroller,
@@ -137,9 +185,35 @@ class _SignupPageState extends State<SignupPage> {
                         height: defaultPadding,
                       ),
                       RoundedRectPrimaryButton(
+                          loading: loading,
                           text: "Continue",
-                          onpressed: () {
-                            Get.to(HomePage());
+                          onpressed: () async {
+                            setState(() {
+                              loading = true;
+                            });
+                            Position position = await determinePosition();
+
+                            RegisterApi.profileCompletion(
+                                    name: nameController.text,
+                                    username: usernameController.text,
+                                    bio: bioCntroller.text,
+                                    gender: gender,
+                                    hip: gender == "female"
+                                        ? double.parse(hipCntroller.text)
+                                        : 0,
+                                    neck: double.parse(neckCntroller.text),
+                                    waist: double.parse(waistCntroller.text),
+                                    lat: position.latitude,
+                                    lon: position.longitude,
+                                    height: double.parse(heightController.text),
+                                    weight: double.parse(weightController.text),
+                                    birthday: birthdayDate!)
+                                .whenComplete(() {
+                              setState(() {
+                                loading = false;
+                              });
+                            });
+                            // Get.to(HomePage());
                           })
                     ],
                   ),
