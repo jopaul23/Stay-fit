@@ -37,7 +37,7 @@ class _MobileEntryState extends State<MobileEntry> {
                     height: 50,
                   ),
                   SvgPicture.asset(
-                    "asset/svg/login-svg.svg",
+                    "assets/svg/login-svg.svg",
                     width: size.width - defaultPadding * 4,
                   ),
                   const SizedBox(

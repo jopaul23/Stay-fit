@@ -39,7 +39,7 @@ class _SignupPageState extends State<SignupPage> {
             child: Column(
               children: [
                 SvgPicture.asset(
-                  "asset/svg/workout-svg.svg",
+                  "assets/svg/workout-svg.svg",
                   width: size.width - defaultPadding * 4,
                 ),
                 const Text(

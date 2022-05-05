@@ -6,6 +6,7 @@ import 'package:stayfit/views/screens/food-cumnsumption/food_consumption_page.da
 import 'package:stayfit/views/screens/home/home_container_one.dart';
 import 'package:stayfit/views/screens/home/home_container_two.dart';
 import 'package:stayfit/views/screens/home/linear_progress.dart';
+import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 
@@ -121,15 +122,20 @@ class _HomePageState extends State<HomePage> {
                   HomeContainerTwo(
                       size: size,
                       title: "AI Workout\nChallenge",
-                      image: "asset/png/ai-png.png",
+                      image: "assets/png/ai-png.png",
                       buttonText: "participate",
                       ontap: () {}),
-                  HomeContainerTwo(
-                      size: size,
-                      title: "Workout!\nstay fit",
-                      image: "asset/png/dumbell-png.png",
-                      buttonText: "participate",
-                      ontap: () {}),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(ProgressPage());
+                    },
+                    child: HomeContainerTwo(
+                        size: size,
+                        title: "Workout!\nstay fit",
+                        image: "assets/png/dumbell-png.png",
+                        buttonText: "participate",
+                        ontap: () {}),
+                  ),
                 ],
               ),
               const SizedBox(

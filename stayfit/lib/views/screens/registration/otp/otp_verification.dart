@@ -38,7 +38,7 @@ class _OtpPageState extends State<OtpPage> {
                     height: 50,
                   ),
                   SvgPicture.asset(
-                    "asset/svg/otp-svg.svg",
+                    "assets/svg/otp-svg.svg",
                     width: size.width - defaultPadding * 4,
                   ),
                   const SizedBox(
