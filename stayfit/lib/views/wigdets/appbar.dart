@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:stayfit/views/constants/constants.dart';
 
 PreferredSizeWidget appBarCustom(
-    {required String title, Widget? suffixWidget, required bool? shadow}) {
+    {Widget? prefixWidget,
+    required String title,
+    Widget? suffixWidget,
+    required bool? shadow}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(
@@ -20,15 +23,16 @@ PreferredSizeWidget appBarCustom(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
-              onTap: () {
-                Get.back();
-              },
-              child: Icon(
-                Icons.arrow_back,
-                color: ChatPageColors.white,
-                size: 22,
-              )),
+          prefixWidget ??
+              InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: ChatPageColors.white,
+                    size: 22,
+                  )),
           SizedBox(
             width: defaultPadding,
           ),
