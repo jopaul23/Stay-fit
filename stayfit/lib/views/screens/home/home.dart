@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/views/constants/constants.dart';
+import 'package:stayfit/views/screens/food-cumnsumption/food_consumption_page.dart';
 import 'package:stayfit/views/screens/home/home_container_one.dart';
 import 'package:stayfit/views/screens/home/home_container_two.dart';
 import 'package:stayfit/views/screens/home/linear_progress.dart';
@@ -127,7 +129,27 @@ class _HomePageState extends State<HomePage> {
                       title: "Workout!\nstay fit",
                       image: "asset/png/dumbell-png.png",
                       buttonText: "participate",
-                      ontap: () {})
+                      ontap: () {}),
+                ],
+              ),
+              const SizedBox(
+                height: defaultPadding,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(FoodConsumptionPage());
+                    },
+                    child: HomeContainerOne(
+                      size: size,
+                      title: "Food consumption Status",
+                      remark: "1200",
+                      text: "calories",
+                      percent: .3,
+                    ),
+                  )
                 ],
               )
             ],

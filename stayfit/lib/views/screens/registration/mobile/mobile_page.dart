@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:stayfit/api/register_api.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/registration/otp/otp_verification.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
@@ -89,8 +90,24 @@ class _MobileEntryState extends State<MobileEntry> {
                   ),
                   RoundedRectPrimaryButton(
                       text: "Continue",
-                      onpressed: () {
-                        Get.to(OtpPage());
+                      onpressed: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        int statusCode = await RegisterApi.emailCheck(
+                                mobile: mobileController.text,
+                                countryCode: countryController.text)
+                            .whenComplete(() {
+                          setState(() {
+                            isLoading = false;
+                          });
+                        });
+                        print("status on mobile : $statusCode");
+                        if (statusCode == 200) {
+                          Get.to(OtpPage());
+                        } else {
+                          // Get.to(OtpPage());
+                        }
                       })
                 ]),
           ),
