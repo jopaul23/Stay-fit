@@ -46,20 +46,16 @@ class _BotChatState extends State<BotChat> {
                     decoration: InputDecoration(
                         border: InputBorder.none, hintText: "Enter text here"),
                     showCursor: true,
-                    onSubmitted: (value) {
-                      final mes = BotMessageModel(
-                          isBot: 0, message: textEditingController.text);
-                      chatController.addMessage(message: mes);
-                    },
+                    onSubmitted: (value) {},
                   ),
                 ),
               ),
               InkWell(
                 onTap: () {
                   focus.unfocus();
-                  final mes = BotMessageModel(
-                      isBot: 0, message: textEditingController.text);
-                  chatController.addMessage(message: mes);
+                  // final mes = BotMessageModel(
+                  //     isBot: 0, message: textEditingController.text);
+                  // chatController.addMessage(message: mes);
                   print("success from app");
                 },
                 child: Container(

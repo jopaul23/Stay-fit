@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/ai_challenge/challenge_ui.dart';
 import 'package:stayfit/views/constants/constants.dart';
+import 'package:stayfit/views/screens/chat/chat_screen.dart';
+import 'package:stayfit/views/screens/chat/normal-chat/all_users_display.dart';
 import 'package:stayfit/views/screens/food-cumnsumption/food_consumption_page.dart';
 import 'package:stayfit/views/screens/home/home_container_one.dart';
 import 'package:stayfit/views/screens/home/home_container_two.dart';
@@ -57,7 +59,9 @@ class _HomePageState extends State<HomePage> {
                   width: defaultPadding,
                 ),
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(AllChatUsersDisplay());
+                    },
                     child: Icon(
                       Icons.chat_rounded,
                       color: ChatPageColors.white,

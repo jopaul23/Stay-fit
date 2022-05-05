@@ -104,7 +104,10 @@ class _MobileEntryState extends State<MobileEntry> {
                         });
                         print("status on mobile : $statusCode");
                         if (statusCode == 200) {
-                          Get.to(OtpPage());
+                          Get.to(OtpPage(
+                            mobile: mobileController.text,
+                            countryCode: countryController.text,
+                          ));
                         } else {
                           // Get.to(OtpPage());
                         }

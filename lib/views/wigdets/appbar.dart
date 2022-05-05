@@ -6,7 +6,7 @@ PreferredSizeWidget appBarCustom(
     {Widget? prefixWidget,
     required String title,
     Widget? suffixWidget,
-    required bool? shadow}) {
+    bool? shadow}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(

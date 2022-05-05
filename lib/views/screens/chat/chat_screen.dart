@@ -20,41 +20,41 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Scaffold(
         backgroundColor: ChatPageColors.bgColor,
         appBar: appBarCustom(
-          title: "Chat Page",
+          title: "Triner/Dietitian Page",
           shadow: false,
         ),
         body: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(defaultPadding),
-                  bottomRight: Radius.circular(defaultPadding)),
-              child: Row(
-                children: [
-                  pageSelector(
-                      title: "Fitty Assist",
-                      ontap: () {
-                        setState(() {
-                          selected = 0;
-                        });
-                      },
-                      isSelected: selected == 0),
-                  pageSelector(
-                      title: "Trainers/Dietitians",
-                      ontap: () {
-                        setState(() {
-                          selected = 1;
-                        });
-                      },
-                      isSelected: selected == 1),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: defaultPadding,
-            ),
+          children: const [
+            // ClipRRect(
+            //   borderRadius: BorderRadius.only(
+            //       bottomLeft: Radius.circular(defaultPadding),
+            //       bottomRight: Radius.circular(defaultPadding)),
+            //   child: Row(
+            //     children: [
+            //       pageSelector(
+            //           title: "Fitty Assist",
+            //           ontap: () {
+            //             setState(() {
+            //               selected = 0;
+            //             });
+            //           },
+            //           isSelected: selected == 0),
+            //       pageSelector(
+            //           title: "Trainers/Dietitians",
+            //           ontap: () {
+            //             setState(() {
+            //               selected = 1;
+            //             });
+            //           },
+            //           isSelected: selected == 1),
+            //     ],
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: defaultPadding,
+            // ),
             Expanded(
-              child: selected == 0 ? BotChat() : NormalChat(),
+              child: NormalChat(),
             )
           ],
         ),

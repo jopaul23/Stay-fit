@@ -1,20 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:convert';
-import 'package:lottie/lottie.dart';
-import 'package:flutter/services.dart';
 import 'package:stayfit/views/screens/chat/chat_screen.dart';
+import 'package:stayfit/views/screens/home/home.dart';
+import 'package:stayfit/views/screens/registration/extra-details/extra_details.dart';
 import 'package:stayfit/views/screens/registration/mobile/mobile_page.dart';
-import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
-import 'package:stayfit/views/screens/workout/screen_one.dart';
-// import 'package:stayfit/views/screens/workout/workout_screen.dart';
-import 'package:stayfit/views/screens/workout/tts.dart';
-import 'package:stayfit/views/screens/workout/individual_workout.dart';
 
 import 'views/constants/constants.dart';
 
-// final fcmToken = await FirebaseMessaging.instance.getToken();
-void main() => runApp(Myapp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(Myapp());
+}
 
 class Myapp extends StatelessWidget {
   const Myapp({Key? key}) : super(key: key);
@@ -28,7 +27,7 @@ class Myapp extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       child: GetMaterialApp(
-        home: MobileEntry(),
+        home: ChatScreen(),
       ),
     );
   }

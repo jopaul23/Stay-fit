@@ -1,26 +1,26 @@
-// To parse this JSON data, do
-//
-//     final jobModel = jobModelFromMap(jsonString);
-
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-class BotMessageModel {
-  BotMessageModel({
+class MessageModel {
+  MessageModel({
+    required this.from,
+    required this.to,
     required this.message,
-    required this.isBot,
   });
 
+  String from;
+  String to;
   String message;
-  int isBot;
 
-  factory BotMessageModel.fromMap(Map<String, dynamic> json) => BotMessageModel(
+  factory MessageModel.fromMap(Map<String, dynamic> json) => MessageModel(
+        from: json["from"],
+        to: json["to"],
         message: json["message"],
-        isBot: json["is_bot"],
       );
 
   Map<String, dynamic> toMap() => {
+        "from": from,
+        "to": to,
         "message": message,
-        "is_bot": isBot,
       };
 }

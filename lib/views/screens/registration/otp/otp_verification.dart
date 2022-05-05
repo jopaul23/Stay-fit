@@ -3,22 +3,25 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:stayfit/api/register_api.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/registration/extra-details/extra_details.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 import 'package:stayfit/views/wigdets/textfield_custom.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({Key? key}) : super(key: key);
+  const OtpPage({Key? key, required this.mobile, required this.countryCode})
+      : super(key: key);
 
   @override
   _OtpPageState createState() => _OtpPageState();
+  final String mobile;
+  final String countryCode;
 }
 
 class _OtpPageState extends State<OtpPage> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController countryController = TextEditingController(text: "+91");
-  String mobile = "";
   String token = "";
   bool isLoading = false;
   @override
@@ -76,6 +79,9 @@ class _OtpPageState extends State<OtpPage> {
                       //runs when a code is typed in
                       onCodeChanged: (String code) {
                         //handle validation or checks here
+                        setState(() {
+                          token = code;
+                        });
                       },
                       //runs when every textfield is filled
                       onSubmit: (String verificationCode) {
@@ -91,7 +97,11 @@ class _OtpPageState extends State<OtpPage> {
                   ),
                   RoundedRectPrimaryButton(
                       text: "Continue",
-                      onpressed: () {
+                      onpressed: () async {
+                        int status = await RegisterApi.verificationApi(
+                            mobile: widget.mobile,
+                            countryCode: widget.countryCode,
+                            otp: token);
                         Get.to(SignupPage());
                       })
                 ]),
