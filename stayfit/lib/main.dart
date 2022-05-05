@@ -6,7 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:stayfit/views/screens/chat/chat_screen.dart';
 import 'package:stayfit/views/screens/registration/mobile/mobile_page.dart';
 import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
-import 'package:stayfit/views/screens/workout/workout_screen.dart';
+import 'package:stayfit/views/screens/workout/screen_one.dart';
+// import 'package:stayfit/views/screens/workout/workout_screen.dart';
 import 'package:stayfit/views/screens/workout/tts.dart';
 import 'package:stayfit/views/screens/workout/individual_workout.dart';
 

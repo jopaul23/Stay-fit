@@ -17,7 +17,7 @@ class TopContainer extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          "asset/svg/workout-svg.svg",
+          "assets/svg/workout-svg.svg",
           width: MediaQuery.of(context).size.width - 4 * defaultPadding,
         ),
         Container(
