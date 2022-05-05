@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+var count = 1;
+List item = [];
 const primaryPurple = Color(0xff031A43);
 final white = Color(0xffffffff);
 double defaultPadding = 16;

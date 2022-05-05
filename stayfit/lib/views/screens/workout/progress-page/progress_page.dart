@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/workout/progress-page/top_container.dart';
+import 'package:stayfit/views/screens/workout/screen_one.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 
@@ -15,10 +17,10 @@ class ProgressPage extends StatefulWidget {
 }
 
 class _ProgressPageState extends State<ProgressPage> {
-  int currentDay = 13;
+  int currentDay = 2;
   @override
   Widget build(BuildContext context) {
-    currentDay = 14;
+    currentDay = 2;
     return SafeArea(
       child: Scaffold(
         backgroundColor: ProgressPageColor.bgColor,
@@ -76,10 +78,27 @@ class _ProgressPageState extends State<ProgressPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   for (int j = 0; j < 4; j++)
-                                                    completedDay(
-                                                        day: 4 * i + j + 1,
-                                                        currentDay: currentDay,
-                                                        week: k + 1)
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        if (k * 7 +
+                                                                i * 4 +
+                                                                j +
+                                                                1 <=
+                                                            currentDay) {
+                                                          Get.to(Screen1(
+                                                              type: "fullbody",
+                                                              day: (i * 4 +
+                                                                      j +
+                                                                      1)
+                                                                  .toString()));
+                                                        }
+                                                      },
+                                                      child: completedDay(
+                                                          day: 4 * i + j + 1,
+                                                          currentDay:
+                                                              currentDay,
+                                                          week: k + 1),
+                                                    )
                                                 ],
                                               ),
                                             ],
@@ -167,7 +186,7 @@ Widget completedDay(
         ),
       day == 8
           ? SvgPicture.asset(
-              "asset/svg/trophy-grey.svg",
+              "assets/svg/trophy-grey.svg",
               color: (week - 1) < (currentDay / 7).floor()
                   ? Colors.orange
                   : ProgressPageColor.chatGrey,
