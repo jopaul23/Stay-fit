@@ -22,7 +22,7 @@ class _ProgressPageState extends State<ProgressPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: ProgressPageColor.bgColor,
-        appBar: appBarCustom(title: "7x4 Challenges"),
+        appBar: appBarCustom(title: "7x4 Challenges", shadow: false),
         body: Column(
           children: [
             TopContainer(currentDay: currentDay),

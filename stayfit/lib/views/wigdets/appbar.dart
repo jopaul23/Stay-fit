@@ -3,20 +3,20 @@ import 'package:get/get.dart';
 import 'package:stayfit/views/constants/constants.dart';
 
 PreferredSizeWidget appBarCustom(
-    {required String title, Widget? suffixWidget}) {
+    {required String title, Widget? suffixWidget, required bool? shadow}) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(
       padding: EdgeInsets.all(defaultPadding),
       // height: 55,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: ChatPageColors.primaryPurple,
-          boxShadow: [
-            BoxShadow(
-                color: ChatPageColors.primaryPurple.withOpacity(0.2),
-                blurRadius: 20)
-          ]),
+      decoration:
+          BoxDecoration(color: ChatPageColors.primaryPurple, boxShadow: [
+        if (shadow == true)
+          BoxShadow(
+              color: ChatPageColors.primaryPurple.withOpacity(0.2),
+              blurRadius: 20)
+      ]),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

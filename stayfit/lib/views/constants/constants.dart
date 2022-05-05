@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 const primaryPurple = Color(0xff031A43);
-final white = Color(0xffffffff);
-double defaultPadding = 16;
+const white = Color(0xffffffff);
+const double defaultPadding = 16;
+const Color red = Color(0xffe33434);
 
 class ChatPageColors {
   static final bgColor = Color(0xffF7F8F9);

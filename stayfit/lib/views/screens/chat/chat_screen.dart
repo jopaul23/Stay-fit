@@ -19,7 +19,10 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: ChatPageColors.bgColor,
-        appBar: appBarCustom(title: "Chat Page"),
+        appBar: appBarCustom(
+          title: "Chat Page",
+          shadow: false,
+        ),
         body: Column(
           children: [
             ClipRRect(

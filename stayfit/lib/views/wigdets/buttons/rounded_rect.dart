@@ -53,7 +53,7 @@ class _RoundedRectPrimaryButtonState extends State<RoundedRectPrimaryButton>
                     color: widget.color,
                     boxShadow: [
                       BoxShadow(
-                          blurRadius: 30, color: primaryPurple.withOpacity(0.4))
+                          blurRadius: 10, color: primaryPurple.withOpacity(0.4))
                     ]),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
