@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pedometer/pedometer.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/ai_challenge/challenge_ui.dart';
 import 'package:stayfit/views/constants/constants.dart';
@@ -9,18 +10,15 @@ import 'package:stayfit/views/screens/food-cumnsumption/food_consumption_page.da
 import 'package:stayfit/views/screens/home/home_container_one.dart';
 import 'package:stayfit/views/screens/home/home_container_two.dart';
 import 'package:stayfit/views/screens/home/linear_progress.dart';
+import 'package:stayfit/views/screens/home/steps_count.dart';
+import 'package:stayfit/views/screens/profile/profile_page.dart';
 import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -39,7 +37,9 @@ class _HomePageState extends State<HomePage> {
             suffixWidget: Row(
               children: [
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(ProfilePage());
+                    },
                     child: Icon(
                       Icons.account_box_rounded,
                       color: ChatPageColors.white,
@@ -77,6 +77,7 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const StepsCount(),
               const SizedBox(
                 height: defaultPadding,
               ),
@@ -168,7 +169,14 @@ class _HomePageState extends State<HomePage> {
                       text: "calories",
                       percent: .3,
                     ),
-                  )
+                  ),
+                  // HomeContainerOne(
+                  //   size: size,
+                  //   title: _status,
+                  //   remark: _steps,
+                  //   text: "complete",
+                  //   percent: .3,
+                  // ),
                 ],
               )
             ],

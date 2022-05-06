@@ -34,6 +34,14 @@ class _SignupPageState extends State<SignupPage> {
   String gender = "";
   bool loading = false;
   List<String> genders = ["male", "female", "other"];
+  List<String> works = [
+    "little",
+    "light",
+    "moderate",
+    "active",
+    "highly active"
+  ];
+  int work = -1;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -158,6 +166,17 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(
                         height: defaultPadding * 2,
                       ),
+                      DropDownCustom(
+                          items: works,
+                          dropdownChanged: (value) {
+                            setState(() {
+                              work = value;
+                            });
+                          },
+                          text: "work type"),
+                      const SizedBox(
+                        height: defaultPadding,
+                      ),
                       BioField(
                         textEditingController: bioCntroller,
                       ),
@@ -194,6 +213,7 @@ class _SignupPageState extends State<SignupPage> {
                             Position position = await determinePosition();
 
                             RegisterApi.profileCompletion(
+                                    activeness: work,
                                     name: nameController.text,
                                     username: usernameController.text,
                                     bio: bioCntroller.text,

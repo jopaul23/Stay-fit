@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stayfit/controller/chat_controller.dart';
 import 'package:stayfit/models/message_model.dart';
 import 'package:stayfit/views/constants/constants.dart';
-import 'package:stayfit/views/screens/chat/normal-chat/trainer_chat_controller.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -19,31 +16,12 @@ class NormalChat extends StatefulWidget {
 class _NormalChatState extends State<NormalChat> {
   TextEditingController textEditingController = TextEditingController();
   FocusNode focus = FocusNode();
-
+  ChatController chatController = Get.put(ChatController());
   List<MessageModel> messages = [
     MessageModel(from: "jopi", to: "naigal", message: "Hii Sir,\nGood morning"),
     MessageModel(from: "naigal", to: "jopi", message: "Hii Jopaul"),
     MessageModel(from: "naigal", to: "jopi", message: "GM"),
   ];
-  late String chatId;
-  late TrainerChatController chatController;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    chatId = "6272b9de23d223c0dcbdd73f";
-    chatController = Get.put(TrainerChatController());
-
-    chatController.streamController.stream.listen((event) {
-      final data = jsonDecode(event);
-      if (data["command"] == "get_message") {
-        chatId = data["result"]["_id"];
-        print(chatId);
-      }
-    });
-    chatController.getMessages("naigal");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,51 +32,41 @@ class _NormalChatState extends State<NormalChat> {
             height: defaultPadding,
           ),
           Expanded(
-              child: StreamBuilder(
-                  stream: chatController.streamController.stream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      parseData(jsonDecode(snapshot.data.toString()));
-                      return ListView.builder(
-                        itemCount: messages.length,
-                        itemBuilder: (context, index) {
-                          bool isSender = messages[index].from == "jopi";
-                          return Padding(
-                            padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                if (isSender) Spacer(),
-                                Container(
-                                  padding: EdgeInsets.all(defaultPadding),
-                                  constraints: BoxConstraints(maxWidth: 200),
-                                  decoration: BoxDecoration(
-                                      color: primaryPurple.withOpacity(.8),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: !isSender
-                                              ? Radius.circular(0)
-                                              : Radius.circular(defaultPadding),
-                                          topRight: isSender
-                                              ? Radius.circular(0)
-                                              : Radius.circular(defaultPadding),
-                                          bottomLeft:
-                                              Radius.circular(defaultPadding),
-                                          bottomRight:
-                                              Radius.circular(defaultPadding))),
-                                  child: Text(
-                                    messages[index].message,
-                                    style: TextStyle(color: white),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    } else {
-                      return const Center(child: Text("No message to display"));
-                    }
-                  })),
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                bool isSender = messages[index].from == "jopi";
+                return Padding(
+                  padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      if (isSender) Spacer(),
+                      Container(
+                        padding: EdgeInsets.all(defaultPadding),
+                        constraints: BoxConstraints(maxWidth: 200),
+                        decoration: BoxDecoration(
+                            color: primaryPurple.withOpacity(.8),
+                            borderRadius: BorderRadius.only(
+                                topLeft: !isSender
+                                    ? Radius.circular(0)
+                                    : Radius.circular(defaultPadding),
+                                topRight: isSender
+                                    ? Radius.circular(0)
+                                    : Radius.circular(defaultPadding),
+                                bottomLeft: Radius.circular(defaultPadding),
+                                bottomRight: Radius.circular(defaultPadding))),
+                        child: Text(
+                          messages[index].message,
+                          style: TextStyle(color: white),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Row(
@@ -121,11 +89,9 @@ class _NormalChatState extends State<NormalChat> {
                       showCursor: true,
                       onSubmitted: (value) {
                         final mes = MessageModel(
-                            from: chatController.user,
+                            from: "jopi",
                             to: "naigal",
                             message: textEditingController.text);
-                        chatController.sendMsg(
-                            chatId, "naigal", textEditingController.text);
                         // chatController.addMessage(message: mes);
 
                         setState(() {
@@ -144,8 +110,7 @@ class _NormalChatState extends State<NormalChat> {
                         to: "naigal",
                         message: textEditingController.text);
                     // chatController.addMessage(message: mes);
-                    chatController.sendMsg(
-                        chatId, "naigal", textEditingController.text);
+
                     setState(() {
                       messages.add(mes);
                       textEditingController.clear();
@@ -177,12 +142,5 @@ class _NormalChatState extends State<NormalChat> {
         ],
       ),
     );
-  }
-
-  void parseData(Map<String, dynamic> data) {
-    print(data);
-    if (data["command"] == "recivied") {
-      messages.add(MessageModel.fromMap(data));
-    }
   }
 }

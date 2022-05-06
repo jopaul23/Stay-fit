@@ -161,6 +161,7 @@ class RegisterApi {
     required double height,
     required double weight,
     required DateTime birthday,
+    required int activeness,
   }) async {
     String url = "http://app.geekstudios.tech/user/v1/profile/update";
     print("url $url");
@@ -186,7 +187,8 @@ class RegisterApi {
       "lat": lat,
       "lon": lon,
       "bio": bio,
-      "gender": gender
+      "gender": gender,
+      "activeness": activeness
     };
     print(body);
     try {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +7,8 @@ import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/registration/extra-details/extra_details.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 import 'package:stayfit/views/wigdets/textfield_custom.dart';
+
+import '../../../wigdets/otp_textfield.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({Key? key, required this.mobile, required this.countryCode})
@@ -67,28 +68,36 @@ class _OtpPageState extends State<OtpPage> {
                     height: defaultPadding,
                   ),
                   Align(
-                    alignment: Alignment.center,
-                    child: OtpTextField(
-                      numberOfFields: 6,
-                      borderColor: primaryPurple,
-                      focusedBorderColor: primaryPurple,
-                      cursorColor: primaryPurple,
-                      keyboardType: TextInputType.number,
-                      //set to true to show as box or false to show as dash
-                      showFieldAsBox: true,
-                      //runs when a code is typed in
-                      onCodeChanged: (String code) {
-                        //handle validation or checks here
-                        setState(() {
-                          token = code;
-                        });
-                      },
-                      //runs when every textfield is filled
-                      onSubmit: (String verificationCode) {
-                        token = verificationCode;
-                      }, // end onSubmit
-                    ),
-                  ),
+                      alignment: Alignment.center,
+                      child: OtpTextField(
+                        length: 6,
+                        keyboardType: TextInputType.number,
+                        width: 40,
+                        onEntered: (String verificationCode) {
+                          token += verificationCode;
+                        },
+                      )
+                      //  OtpTextField(
+                      //   numberOfFields: 6,
+                      //   borderColor: primaryPurple,
+                      //   focusedBorderColor: primaryPurple,
+                      //   cursorColor: primaryPurple,
+                      //   keyboardType: TextInputType.number,
+                      //   //set to true to show as box or false to show as dash
+                      //   showFieldAsBox: true,
+                      //   //runs when a code is typed in
+                      //   onCodeChanged: (String code) {
+                      //     //handle validation or checks here
+                      //     setState(() {
+                      //       token = code;
+                      //     });
+                      //   },
+                      //   //runs when every textfield is filled
+                      //   onSubmit: (String verificationCode) {
+                      //     token = verificationCode;
+                      //   }, // end onSubmit
+                      // ),
+                      ),
                   const SizedBox(
                     height: 50,
                   ),

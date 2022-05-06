@@ -35,6 +35,7 @@ dependencies:
   firebase_core: ^1.16.0
   firebase_messaging: ^11.3.0
   firebase_messaging_web: ^2.3.0
+  flutter_local_notifications:
   flutter:
     sdk: flutter
   flutter_otp_text_field: ^1.0.1
@@ -53,6 +54,7 @@ dependencies:
   web_socket_channel: ^2.2.0
   shared_preferences: ^2.0.13
   geolocator: ^8.2.1
+  pedometer: ^3.0.0
 
 dev_dependencies:
 

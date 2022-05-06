@@ -77,6 +77,7 @@ class _MobileEntryState extends State<MobileEntry> {
                         Expanded(
                           child: TextFieldCustom(
                               hintText: "mobile",
+                              keyboardType: TextInputType.number,
                               textEditingController: mobileController),
                         ),
                       ],
@@ -89,6 +90,7 @@ class _MobileEntryState extends State<MobileEntry> {
                     height: 70,
                   ),
                   RoundedRectPrimaryButton(
+                      loading: isLoading,
                       text: "Continue",
                       onpressed: () async {
                         setState(() {
