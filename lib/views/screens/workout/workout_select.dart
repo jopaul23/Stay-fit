@@ -19,12 +19,13 @@ class WorkoutSelect extends StatelessWidget {
             body: Container(
               child: ListView(
                 children: [
+                  Text(""),
                   GestureDetector(
                     onTap: () => {Get.to(ProgressPage())},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
                       height: 130,
-                      decoration: BoxDecoration(color: Colors.white),
+                      decoration: BoxDecoration(color: Color.fromARGB(239, 240, 155, 28)),
                       child: Center(
                         child:  ListTile(
                           title: Center(
@@ -32,6 +33,48 @@ class WorkoutSelect extends StatelessWidget {
                             children: [
                               Container(
                                   height: 120,
+                                  width: 100,
+                                  child: SvgPicture.asset("assets/svg/workout-svg.svg")),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 15.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text("Workout Generated\n for You  ",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w700)),
+                                    // Padding(
+                                    //   padding:
+                                    //       const EdgeInsets.only(top: 6.0),
+                                    //   child: Text("7X4 workout",
+                                    //       style: TextStyle(
+                                    //           color: Colors.grey,
+                                    //           fontSize: 16)),
+                                    // ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )),
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => {Get.to(ProgressPage())},
+                    child: Container(
+                       margin: EdgeInsets.all(defaultPadding),
+                      height: 120,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Center(
+                        child:  ListTile(
+                          title: Center(
+                              child: Row(
+                            children: [
+                              Container(
+                                  height: 150,
                                   width: 100,
                                   child: SvgPicture.asset("assets/svg/undraw_biking_kc-4-f.svg")),
                               Padding(
@@ -61,7 +104,7 @@ class WorkoutSelect extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 5,
                   ),
                   Padding(
                     padding:
@@ -74,7 +117,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "abs", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -117,7 +160,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "chest", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -160,7 +203,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "arm", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -168,7 +211,7 @@ class WorkoutSelect extends StatelessWidget {
                               child: Row(
                             children: [
                               Container(
-                                  height: 120,
+                                  height: 100,
                                   width: 100,
                                   child:SvgPicture.asset("assets/svg/undraw_working_out_re_nhkg.svg")),
                               Padding(
@@ -203,7 +246,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "leg", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -254,7 +297,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "abs", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -297,7 +340,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "chest", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -340,7 +383,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "arm", day: "beginner"))},
                     child: Container(
                        margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(
@@ -348,7 +391,7 @@ class WorkoutSelect extends StatelessWidget {
                               child: Row(
                             children: [
                               Container(
-                                  height: 120,
+                                  height: 100,
                                   width: 100,
                                   child: SvgPicture.asset("assets/svg/undraw_working_out_re_nhkg.svg")),
                               Padding(
@@ -383,7 +426,7 @@ class WorkoutSelect extends StatelessWidget {
                         {Get.to(Screen1(type: "leg", day: "beginner"))},
                     child: Container(
                       margin: EdgeInsets.all(defaultPadding),
-                      height: 130,
+                      height: 120,
                       decoration: BoxDecoration(color: Colors.white),
                       child: Center(
                         child: ListTile(

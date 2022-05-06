@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/ai_challenge/challenge_ui.dart';
+import 'package:stayfit/controller/consumption_controller.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/food-cumnsumption/food_consumption_page.dart';
 import 'package:stayfit/views/screens/home/home_container_one.dart';
@@ -20,6 +21,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final consumtionControler = Get.put(ConsumptionController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
