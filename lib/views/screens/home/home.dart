@@ -22,6 +22,7 @@ import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
 import 'package:stayfit/views/wigdets/buttons/rounded_rect.dart';
 
+import '../../wigdets/app_drawer.dart';
 import '../workout/workout_select.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,16 +55,21 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
+        drawer: const AppDrawer(),
         appBar: appBarCustom(
             title: "",
             shadow: true,
             prefixWidget: InkWell(
-                onTap: () {},
+                onTap: () {
+                  _scaffoldKey.currentState!.openDrawer();
+                },
                 child: Icon(
                   Icons.menu,
                   color: ChatPageColors.white,
@@ -71,18 +77,6 @@ class _HomePageState extends State<HomePage> {
                 )),
             suffixWidget: Row(
               children: [
-                InkWell(
-                    onTap: () {
-                      Get.to(ProfilePage());
-                    },
-                    child: Icon(
-                      Icons.account_box_rounded,
-                      color: ChatPageColors.white,
-                      size: 22,
-                    )),
-                const SizedBox(
-                  width: defaultPadding,
-                ),
                 InkWell(
                     onTap: () {},
                     child: Icon(
@@ -93,22 +87,13 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   width: defaultPadding,
                 ),
-                InkWell(
-                    onTap: () {
-                      Get.to(ChatScreen());
-                    },
-                    child: Icon(
-                      Icons.chat_rounded,
-                      color: ChatPageColors.white,
-                      size: 22,
-                    )),
               ],
             )),
         backgroundColor: white,
         body: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(defaultPadding),
+            padding: const EdgeInsets.all(defaultPadding),
             alignment: Alignment.center,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

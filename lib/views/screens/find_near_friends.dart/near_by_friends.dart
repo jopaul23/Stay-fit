@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:stayfit/api/user_api.dart';
 import 'package:stayfit/models/user_model.dart';
 import 'package:stayfit/views/constants/constants.dart';
+import 'package:stayfit/views/screens/find_near_friends.dart/view_user_profile.dart';
 
 class NearByFriends extends StatefulWidget {
   const NearByFriends({Key? key}) : super(key: key);
@@ -78,16 +80,23 @@ class _NearByFriendsState extends State<NearByFriends> {
           children: [
             Text(
               user.name,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: Colors.white,
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: Icon(Icons.add),
+            InkWell(
+              onTap: () {
+                Get.to(ViewUserProfile(
+                  id: user.id,
+                ));
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: const Icon(Icons.add),
+              ),
             ),
           ],
         ),

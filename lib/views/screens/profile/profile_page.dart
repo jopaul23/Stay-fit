@@ -3,18 +3,14 @@ import 'package:get/get.dart';
 import 'package:stayfit/api/register_api.dart';
 import 'package:stayfit/api/user_api.dart';
 import 'package:stayfit/controller/profile_controller.dart';
+import 'package:stayfit/models/user_model.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatelessWidget {
+  final UserModel userProfile;
+  const ProfilePage({Key? key, required this.userProfile}) : super(key: key);
 
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  ProfileController profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,10 +47,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         CircleAvatar(
                           backgroundImage: NetworkImage(
-                            profileController.userProfile!.profileImages.isEmpty
+                            userProfile.profileImages.isEmpty
                                 ? "https://one1onehomeschooling.co.uk/images/avatar3.jpg"
-                                : profileController
-                                    .userProfile!.profileImages[0],
+                                : userProfile.profileImages[0],
                           ),
                           radius: 50,
                         ),
@@ -65,14 +60,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              profileController.userProfile!.name,
+                              userProfile.name,
                               style: TextStyle(
                                   color: primaryPurple,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20),
                             ),
                             Text(
-                              "${profileController.userProfile!.connectedUsers.length} friends",
+                              "${userProfile.connectedUsers.length} friends",
                               style: TextStyle(
                                   color: primaryPurple,
                                   fontWeight: FontWeight.bold,
@@ -98,8 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       children: [
                         detailContainer(
-                            text: profileController.userProfile!.username
-                                .toString(),
+                            text: userProfile.username.toString(),
                             iconData: Icons.person),
                         Container(
                           width: double.infinity,
@@ -130,7 +124,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 height: 10,
                               ),
                               Text(
-                                profileController.userProfile!.bio,
+                                userProfile.bio,
                                 style: TextStyle(
                                     color: primaryPurple, fontSize: 16),
                               ),
@@ -138,33 +132,26 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         detailContainer(
-                            text: profileController.userProfile!.phone,
-                            iconData: Icons.call),
+                            text: userProfile.phone, iconData: Icons.call),
                         detailContainer(
-                            text: profileController.userProfile!.bmi.toString(),
+                            text: userProfile.bmi.toString(),
                             iconData: Icons.health_and_safety),
                         detailContainer(
-                            text: profileController.userProfile!.dob
-                                .toString()
-                                .substring(0, 10),
+                            text: userProfile.dob.toString().substring(0, 10),
                             iconData: Icons.baby_changing_station),
                         detailContainer(
-                            text: profileController.userProfile!.gender,
-                            iconData: Icons.male),
+                            text: userProfile.gender, iconData: Icons.male),
                         detailContainer(
-                            text: profileController.userProfile!.height
-                                .toString(),
+                            text: userProfile.height.toString(),
                             iconData: Icons.height),
                         detailContainer(
-                            text: profileController.userProfile!.weight
-                                .toString(),
+                            text: userProfile.weight.toString(),
                             iconData: Icons.line_weight),
                         detailContainer(
-                            text: profileController.userProfile!.hip.toString(),
+                            text: userProfile.hip.toString(),
                             iconData: Icons.hive_sharp),
                         detailContainer(
-                            text:
-                                profileController.userProfile!.waist.toString(),
+                            text: userProfile.waist.toString(),
                             iconData: Icons.blender_outlined),
 
                         // detailContainer(

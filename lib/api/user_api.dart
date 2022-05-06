@@ -32,7 +32,101 @@ class UserSimplify {
 }
 
 class UserApi {
-  //
+  static Future<UserModel?> getDetailsUser(String id) async {
+    print("Caing");
+
+    String url = "http://app.geekstudios.tech/user/v1/profile/view/user";
+    final uri = Uri.parse(url);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? accessToken = pref.getString("token");
+    try {
+      http.Response response = await http.post(
+        uri,
+        body: jsonEncode({"id": id}),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken"
+        },
+      ).timeout(const Duration(seconds: 3));
+
+      debugPrint("------------status code------------");
+      debugPrint("${response.statusCode}");
+      debugPrint("st ${jsonDecode(response.body)["status_code"]}");
+      debugPrint("message ${jsonDecode(response.body)["message"]}");
+      debugPrint("response ${jsonDecode(response.body)}");
+
+      debugPrint("-----------------------------------");
+      if (jsonDecode(response.body)["response_code"] == 200) {
+        showToast(
+            color: primaryPurple,
+            context: Get.overlayContext!,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.check);
+
+        return UserModel.fromMap(jsonDecode(response.body)["response"]["user"]);
+      } else {
+        showToast(
+            context: Get.overlayContext!,
+            color: Colors.orange,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.warning);
+        // return;
+      }
+    } catch (e) {
+      debugPrint("Error occured while registering $e");
+      // return 501;
+    }
+  }
+
+  static Future<void> sendFriendRequest(String id) async {
+    String url = "http://app.geekstudios.tech/user/v1/request/sent";
+
+    final uri = Uri.parse(url);
+
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? accessToken = pref.getString("token");
+
+    try {
+      http.Response response = await http.post(
+        uri,
+        body: jsonEncode({"id": id}),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken"
+        },
+      ).timeout(const Duration(seconds: 3));
+
+      debugPrint("------------status code------------");
+      debugPrint("${response.statusCode}");
+      debugPrint("st ${jsonDecode(response.body)["status_code"]}");
+      debugPrint("message ${jsonDecode(response.body)["message"]}");
+      debugPrint("response ${jsonDecode(response.body)}");
+
+      debugPrint("-----------------------------------");
+      if (jsonDecode(response.body)["response_code"] == 200) {
+        showToast(
+            color: primaryPurple,
+            context: Get.overlayContext!,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.check);
+      } else {
+        showToast(
+            context: Get.overlayContext!,
+            color: Colors.orange,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.warning);
+        // return;
+      }
+    } catch (e) {
+      debugPrint("Error occured while registering $e");
+      // return 501;
+    }
+  }
+
   static Future<void> getUser(
       {required ProfileController profileController}) async {
     String url = "http://app.geekstudios.tech/user/v1/profile/get";

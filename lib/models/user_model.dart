@@ -50,23 +50,24 @@ class UserModel {
         id: json["_id"],
         phone: json["phone"],
         countryCode: json["country_code"],
-        profileCompletion: json["profile_completion"],
+        profileCompletion: json["profile_completion"] ?? 0,
         isBlocked: json["is_blocked"],
         bio: json["bio"],
-        bmi: json["bmi"].toDouble(),
-        connectedUsers:
-            List<dynamic>.from(json["connected_users"].map((x) => x)),
+        bmi: json["bmi"] == null ? 0 : json["bmi"].toDouble(),
+        connectedUsers: json["connected_users"] != null
+            ? List<dynamic>.from(json["connected_users"].map((x) => x))
+            : [],
         dob: DateTime.parse(json["dob"]),
         gender: json["gender"],
-        height: json["height"].toDouble(),
-        hip: json["hip"],
+        height: json["height"] == null ? 0 : json["height"].toDouble(),
+        hip: json["hip"] ?? 0,
         name: json["name"],
-        neck: json["neck"].toDouble(),
+        neck: json["neck"] == null ? 0 : json["neck"].toDouble(),
         profileImages: List<dynamic>.from(json["profile_images"].map((x) => x)),
         profileVerified: json["profile_verified"],
         username: json["username"],
-        waist: json["waist"].toDouble(),
-        weight: json["weight"],
+        waist: json["waist"] == null ? 0 : json["waist"].toDouble(),
+        weight: json["weight"] ?? 0,
       );
 
   Map<String, dynamic> toMap() => {

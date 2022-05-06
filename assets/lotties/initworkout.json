@@ -189,6 +189,10 @@
                
             ],
            "absbeginner":[
+            {
+                "title":"abs workout ",
+                "time":" 10 min"  
+              },
                {
                    "url":"jumpingjacks.json",
                    "details":"20 sec jumping jacks",
@@ -273,6 +277,10 @@
             }
            ],
            "chestbeginner":[
+            {
+                "title":"chest workout",
+                "time":" 10 min"  
+              },
                { "url":"jumpingjacks.json",
                 "details":"30 sec jumping jacks",
                 "title":"jumping jacks",
@@ -343,14 +351,20 @@
                "time":"20" 
             },
             {
-                "url":"chest press pulse.json",
-                "detail":"20 sec cobra stretch",
-                "title":"chest press pulse",
-                "type":"time",
-                "time":"20" 
-             }
+                "id":"2",
+                "url":"kneepushup.json",
+                "detail":"4 knee pushups",
+                "title":"knee push-ups",
+                "type":"count",
+                "time":"x4"
+            }
+            
            ],
            "armbeginner" :[
+            {
+                "title":"arm workout",
+                "time":" 10 min"  
+              },
                {
                    "url":"arm raise arms beginner.json",
                    "detail":"30 sec arm raise ",
@@ -374,13 +388,13 @@
                },{
                 "url":"arm circle clockwise.json",
                 "detail":"30 sec arm circles clock wise",
-                "title":"arm circles clockwise",
+                "title":"arm circles ",
                 "type":"time",
                 "time":"30"
                },{
                    "url":"arm circle anticlockwise.json",
                    "detail":"30 sec arm circles anti clock wise",
-                "title":"arm circles anti clockwise",
+                "title":"arm circles ",
                 "type":"time",
                 "time":"30"
                },{
@@ -399,18 +413,18 @@
                 },{
                     "url":"leg barbell curl right.json",
                     "details":"8 leg barbell curl right ",
-                    "title":"leg barbell curl right",
+                    "title":"leg barbell right",
                     "time":"x8",
                     "type":"count"
     
                 },{
-                    "url":"leg barbell curl left.json",
+                    "url":"leg barell curl left.json",
                     "details":"8 leg barbell curl left ",
-                    "title":"leg barbell curl left",
+                    "title":"leg barbell  left",
                     "time":"x8",
                     "type":"count"
                 },{
-                    "url":"diamond plank.json",
+                    "url":"diagonal plank.json",
                     "details":"10 diamond plank  ",
                     "title":"diamond plank",
                     "time":"x10",
@@ -419,6 +433,10 @@
                 
            ],
            "legbeginner":[
+            {
+                "title":"Leg  workout",
+                "time":" 10 min"  
+              },
                {
                 "url":"Backward-lunge-front-kick-left.json",
                 "details":"14 backward lunge front kick left ",
@@ -434,32 +452,32 @@
                 "type":"count"
                },
                {
-                "url":"side lying floor stretch right.json",
-                "details":"12 side lying floor stretch right ",
-                "title":"side-lying leg left",
+                "url":"Flutter-kick-squat.json",
+                "details":"12 flutter kick squat ",
+                "title":"flutter kick squat",
                 "time":"x12",
                 "type":"count"
                },
                {
-                "url":"side lying floor stretch.json",
-                "details":"12 side lying floor stretch left ",
-                "title":"side-lying leg left",
+                "url":"Walking-squats.json",
+                "details":"12 walking squats ",
+                "title":"waking squats",
                 "time":"x12",
                 "type":"count"
 
                },
                {
-                "url":"side lying floor stretch right.json",
-                "details":"12 side lying floor stretch right ",
-                "title":"side-lying leg left",
+                "url":"Plank-jacks.json",
+                "details":"12 plank jacks ",
+                "title":"plank jacks",
                 "time":"x12",
                 "type":"count"
                },{
 
-                "url":"side lying floor stretch.json",
-                "details":"12 side lying floor stretch left ",
-                "title":"side-lying leg left",
-                "time":"x12",
+                "url":"Adductor-starch-in-standing.json",
+                "details":"10 Adductor starch in standing",
+                "title":"Adductor starch ",
+                "time":"x10",
                 "type":"count"
                }, {
                 "url":"Backward-lunge-front-kick-left.json",
