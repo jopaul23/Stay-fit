@@ -5,6 +5,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/ai_challenge/challenge_ui.dart';
 import 'package:stayfit/api/user_api.dart';
 import 'package:stayfit/controller/consumption_controller.dart';
+import 'package:stayfit/controller/notification_controller.dart';
 import 'package:stayfit/controller/post_controller.dart';
 import 'package:stayfit/controller/profile_controller.dart';
 import 'package:stayfit/models/post_model.dart';
@@ -17,6 +18,7 @@ import 'package:stayfit/views/screens/home/home_container_two.dart';
 import 'package:stayfit/views/screens/home/linear_progress.dart';
 import 'package:stayfit/views/screens/home/post/post_container.dart';
 import 'package:stayfit/views/screens/home/steps_count.dart';
+import 'package:stayfit/views/screens/notifications/notification_page.dart';
 import 'package:stayfit/views/screens/profile/profile_page.dart';
 import 'package:stayfit/views/screens/workout/progress-page/progress_page.dart';
 import 'package:stayfit/views/wigdets/appbar.dart';
@@ -36,6 +38,8 @@ class _HomePageState extends State<HomePage> {
   final consumtionControler = Get.put(ConsumptionController());
   ProfileController profileController = Get.put(ProfileController());
   PostController postController = Get.put(PostController());
+  NotificationController notificationController =
+      Get.put(NotificationController());
   List<PostModel> postList = [];
   bool profileLoad = false;
 
@@ -78,15 +82,14 @@ class _HomePageState extends State<HomePage> {
             suffixWidget: Row(
               children: [
                 InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(NotificationPage());
+                    },
                     child: Icon(
                       Icons.notifications_rounded,
                       color: ChatPageColors.white,
                       size: 22,
                     )),
-                const SizedBox(
-                  width: defaultPadding,
-                ),
               ],
             )),
         backgroundColor: white,
@@ -123,6 +126,16 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: defaultPadding,
                 ),
+                Text(
+                  " calorie burnt 2655/3250",
+                  style: TextStyle(
+                      color: ChatPageColors.chatGrey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
+                ),
+                const SizedBox(
+                  height: defaultPadding,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -133,13 +146,18 @@ class _HomePageState extends State<HomePage> {
                       text: "complete",
                       percent: .3,
                     ),
-                    HomeContainerOne(
-                      size: size,
-                      title: "Daily Calorie Status",
-                      remark: "3000",
-                      text: "calories",
-                      percent: .3,
-                    )
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(FoodConsumptionPage());
+                      },
+                      child: HomeContainerOne(
+                        size: size,
+                        title: "Food consumption",
+                        remark: "1200",
+                        text: "calories",
+                        percent: .3,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -177,31 +195,14 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 const SizedBox(
-                  height: defaultPadding,
+                  height: defaultPadding * 2,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(FoodConsumptionPage());
-                      },
-                      child: HomeContainerOne(
-                        size: size,
-                        title: "Food consumption Status",
-                        remark: "1200",
-                        text: "calories",
-                        percent: .3,
-                      ),
-                    ),
-                    // HomeContainerOne(
-                    //   size: size,
-                    //   title: _status,
-                    //   remark: _steps,
-                    //   text: "complete",
-                    //   percent: .3,
-                    // ),
-                  ],
+                Text(
+                  "Learn More",
+                  style: TextStyle(
+                      color: ChatPageColors.chatGrey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
                 const SizedBox(
                   height: defaultPadding,

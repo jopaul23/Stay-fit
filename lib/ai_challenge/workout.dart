@@ -1,10 +1,12 @@
 import 'package:body_detection/body_detection.dart';
 import 'package:body_detection/models/image_result.dart';
 import 'package:body_detection/models/pose.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:stayfit/views/constants/constants.dart';
 
 import 'controller.dart';
 import 'predict.dart';
@@ -20,29 +22,29 @@ class _WorkoutPageState extends State<WorkoutPage> {
   Widget? _cameraImage;
   Size? _imageSize;
   Pose? pose;
-  late HandExcersie handExcersie;
-  late ChallengeController challengeController;
+  RxInt myCount = 0.obs;
+  late BendExcersie handExcersie;
   bool connected = false;
+  int totalSec = 30, currentSec = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    challengeController = Get.find<ChallengeController>();
-    challengeController.connect().then((value) {
-      setState(() {
-        connected = value;
-      });
-      if (value) {
-        _init();
-      }
-    });
+    _init();
+  }
+
+  @override
+  void dispose() {
+    BodyDetection.disablePoseDetection();
+    BodyDetection.stopCameraStream();
+    super.dispose();
   }
 
   void _init() async {
     bool result = await checkPermission();
     if (result) {
-      handExcersie = HandExcersie();
+      handExcersie = BendExcersie();
       await BodyDetection.enablePoseDetection();
       await BodyDetection.startCameraStream(
         onFrameAvailable: (ImageResult image) {
@@ -55,12 +57,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
         },
       );
       handExcersie.addListener(() {
-        if (challengeController.myCount > 1000) {
-          challengeController.myCount = 0;
-        }
-        challengeController.myCount++;
-        challengeController.sendData(challengeController.myCount);
-        challengeController.update(["my_count"]);
+        myCount.value++;
       });
     } else {
       debugPrint("Camera access denied");
@@ -82,110 +79,71 @@ class _WorkoutPageState extends State<WorkoutPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // floatingActionButton: FloatingActionButton(onPressed: () async {
-        //   if (!_start) {
-        //     await BodyDetection.enablePoseDetection();
-        //     await BodyDetection.startCameraStream(
-        //       onFrameAvailable: (ImageResult image) {
-        //         _handleCameraImage(image);
-        //       },
-        //       onPoseAvailable: (Pose? p) {
-        //         if (p != null) {
-        //           setState(() {
-        //             pose = p;
-        //           });
-        //           handExcersie.predict(p);
-        //         }
-        //       },
-        //       onMaskAvailable: (_) {},
-        //     );
-        //   } else {
-        //     await BodyDetection.disablePoseDetection();
-        //     await BodyDetection.stopCameraStream();
-        //   }
+          // floatingActionButton: FloatingActionButton(onPressed: () async {
+          //   if (!_start) {
+          //     await BodyDetection.enablePoseDetection();
+          //     await BodyDetection.startCameraStream(
+          //       onFrameAvailable: (ImageResult image) {
+          //         _handleCameraImage(image);
+          //       },
+          //       onPoseAvailable: (Pose? p) {
+          //         if (p != null) {
+          //           setState(() {
+          //             pose = p;
+          //           });
+          //           handExcersie.predict(p);
+          //         }
+          //       },
+          //       onMaskAvailable: (_) {},
+          //     );
+          //   } else {
+          //     await BodyDetection.disablePoseDetection();
+          //     await BodyDetection.stopCameraStream();
+          //   }
 
-        //   _start = !_start;
-        // }),
-        body: !connected
-            ? const CircularProgressIndicator()
-            : Stack(
-                alignment: Alignment.center,
+          //   _start = !_start;
+          // }),
+          body: Stack(
+        alignment: Alignment.center,
+        children: [
+          _cameraImage ?? const CircularProgressIndicator(),
+          Positioned(
+              top: 50,
+              width: Get.width,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _cameraImage ?? Offstage(),
-                  pose != null
-                      ? CustomPaint(
-                          size: MediaQuery.of(context).size,
-                          //  painter: PosePainter(pose: pose!, imageSize: _imageSize!),
-                        )
-                      : Offstage(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GetBuilder<ChallengeController>(
-                            id: "my_count",
-                            builder: (_) {
-                              return Column(
-                                children: [
-                                  const Text(
-                                    "Naigal",
-                                    style: TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    challengeController.myCount.toString(),
-                                    style: const TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              );
-                            }),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: Text(
-                            "VS",
-                            style: TextStyle(
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red),
-                          ),
-                        ),
-                        GetBuilder<ChallengeController>(
-                            id: "user_count",
-                            builder: (controller) {
-                              return Column(
-                                children: [
-                                  const Text(
-                                    "Pranav",
-                                    style: TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    controller.userCount.toString(),
-                                    style: TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              );
-                            })
-                      ],
-                    ),
-                  )
+                  Text(myCount.toString(),
+                      style: TextStyle(color: primaryPurple)),
                 ],
-              ),
-      ),
+              )),
+          Positioned(
+            bottom: 90,
+            width: Get.width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularCountDownTimer(
+                  width: 70,
+                  height: 70,
+                  duration: totalSec,
+                  fillColor: primaryPurple,
+                  ringColor: Colors.grey[300]!,
+                  onComplete: onComplete,
+                ),
+              ],
+            ),
+          )
+        ],
+      )),
     );
+  }
+
+  void onComplete() async {
+    await BodyDetection.enablePoseDetection();
+    await BodyDetection.startCameraStream();
+
+    //send count to server
   }
 
   void _handleCameraImage(ImageResult result) {

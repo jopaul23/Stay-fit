@@ -28,9 +28,20 @@ class _PostContainerState extends State<PostContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: defaultPadding),
-      width: widget.size.width,
-      color: white,
+      padding: EdgeInsets.symmetric(
+          vertical: defaultPadding, horizontal: defaultPadding),
+      width: double.maxFinite,
+      // height: 55,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              color: primaryPurple.withOpacity(0.1),
+            )
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

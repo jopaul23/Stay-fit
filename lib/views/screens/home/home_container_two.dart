@@ -50,6 +50,7 @@ class HomeContainerTwo extends StatelessWidget {
             text: buttonText,
             onpressed: ontap,
             color: white,
+            fontsize: 16,
             textColor: primaryPurple,
           )
         ],

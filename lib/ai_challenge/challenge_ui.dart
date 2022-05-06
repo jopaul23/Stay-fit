@@ -11,31 +11,31 @@ class FriendlyChallenge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFF00346b),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const Text(
-            "Friendly Challenge",
-            style: TextStyle(
-                color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          Container(
-            height: 400,
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: const BoxDecoration(
-              color: Color(0xFFf5f5f5),
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: GetBuilder<ChallengeController>(
-                  init: ChallengeController(),
-                  builder: (controller) {
-                    return Column(
+        child: Scaffold(
+            backgroundColor: const Color(0xFF00346b),
+            body:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const Text(
+                "Friendly Challenge",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                height: 400,
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFf5f5f5),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
@@ -104,21 +104,13 @@ class FriendlyChallenge extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                controller.status == Status.ready
-                                    ? const Text(
-                                        "Ready",
-                                        style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    : const Text(
-                                        "Waiting",
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      )
+                                const Text(
+                                  "Ready",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                )
                               ],
                             )
                           ],
@@ -126,45 +118,25 @@ class FriendlyChallenge extends StatelessWidget {
                         const SizedBox(
                           height: 50,
                         ),
-                        controller.status == Status.waiting
-                            ? Column(
-                                children: [
-                                  Text(
-                                    "Waiting",
-                                    style: const TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  LottieBuilder.asset(
-                                    "assets/lottie/wave.json",
-                                    height: 100,
-                                    width: 100,
-                                  )
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  Text(
-                                    "Starts In",
-                                    style: const TextStyle(
-                                        color: Color(0xFF00346b),
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  const Counter(maxTime: 15)
-                                ],
-                              ),
-                      ],
-                    );
-                  }),
-            ),
-          ),
-        ]),
-      ),
-    );
+                        Column(
+                          children: [
+                            Text(
+                              "Waiting",
+                              style: const TextStyle(
+                                  color: Color(0xFF00346b),
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            LottieBuilder.asset(
+                              "assets/lotties/wave.json",
+                              height: 100,
+                              width: 100,
+                            )
+                          ],
+                        )
+                      ]),
+                ),
+              )
+            ])));
   }
 }

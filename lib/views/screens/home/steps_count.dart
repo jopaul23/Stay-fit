@@ -21,6 +21,7 @@ class _StepsCountState extends State<StepsCount> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     getSteps().then((v) => _steps = v);
     initPlatformState();
   }

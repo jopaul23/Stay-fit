@@ -136,7 +136,7 @@ class _NormalChatState extends State<NormalChat> {
                         // chatController.addMessage(message: mes);
 
                         setState(() {
-                          messages.add(mes);
+                          messages.insert(0, mes);
                           textEditingController.clear();
                         });
                       },
@@ -154,7 +154,7 @@ class _NormalChatState extends State<NormalChat> {
                     chatController.sendMsg(
                         chatId, "naigal", textEditingController.text);
                     setState(() {
-                      messages.add(mes);
+                      messages.insert(0, mes);
                       textEditingController.clear();
                     });
 
@@ -189,7 +189,7 @@ class _NormalChatState extends State<NormalChat> {
   void parseData(Map<String, dynamic> data) {
     print(data);
     if (data["command"] == "recivied") {
-      messages.add(MessageModel.fromMap(data));
+      messages.insert(0, MessageModel.fromMap(data));
     }
   }
 }

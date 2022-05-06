@@ -112,7 +112,7 @@ class _MyappState extends State<Myapp> {
         color: primaryPurple,
         fontWeight: FontWeight.w500,
       ),
-      child: GetMaterialApp(home: HomePage()),
+      child: GetMaterialApp(home: MobileEntry()),
     );
   }
 }
