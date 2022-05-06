@@ -36,9 +36,13 @@ class _WorkoutPageState extends State<WorkoutPage> {
 
   @override
   void dispose() {
-    BodyDetection.disablePoseDetection();
-    BodyDetection.stopCameraStream();
+    release();
     super.dispose();
+  }
+
+  void release() async {
+    await BodyDetection.disablePoseDetection();
+    await BodyDetection.stopCameraStream();
   }
 
   void _init() async {
@@ -113,8 +117,22 @@ class _WorkoutPageState extends State<WorkoutPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(myCount.toString(),
-                      style: TextStyle(color: primaryPurple)),
+                  Column(
+                    children: [
+                      Text(
+                        "Your Count",
+                        style: TextStyle(
+                            color: primaryPurple,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(myCount.toString(),
+                          style: TextStyle(
+                              color: primaryPurple,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ],
               )),
           Positioned(

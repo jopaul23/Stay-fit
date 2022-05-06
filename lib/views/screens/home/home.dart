@@ -5,7 +5,6 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:stayfit/ai_challenge/challenge_ui.dart';
 import 'package:stayfit/api/user_api.dart';
 import 'package:stayfit/controller/consumption_controller.dart';
-import 'package:stayfit/controller/notification_controller.dart';
 import 'package:stayfit/controller/post_controller.dart';
 import 'package:stayfit/controller/profile_controller.dart';
 import 'package:stayfit/models/post_model.dart';
@@ -38,8 +37,7 @@ class _HomePageState extends State<HomePage> {
   final consumtionControler = Get.put(ConsumptionController());
   ProfileController profileController = Get.put(ProfileController());
   PostController postController = Get.put(PostController());
-  NotificationController notificationController =
-      Get.put(NotificationController());
+
   List<PostModel> postList = [];
   bool profileLoad = false;
 
@@ -171,8 +169,9 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const FriendlyChallenge()));
+                                builder: (context) => const FriendlyChallenge(
+                                      opponent: "Pranav",
+                                    )));
                       },
                       child: HomeContainerTwo(
                           size: size,

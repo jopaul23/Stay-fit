@@ -10,7 +10,7 @@ class ChallengeContainer extends StatelessWidget {
     Key? key,
     required this.notificaion,
   }) : super(key: key);
-  final NotificaionModel notificaion;
+  final NotificaionChallengeModel notificaion;
 
   @override
   Widget build(BuildContext context) {

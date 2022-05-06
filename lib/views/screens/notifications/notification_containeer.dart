@@ -8,7 +8,7 @@ class NotificationContainer extends StatelessWidget {
     Key? key,
     required this.notificaion,
   }) : super(key: key);
-  final NotificaionModel notificaion;
+  final NotificaionRequestModel notificaion;
   @override
   Widget build(BuildContext context) {
     return Container(

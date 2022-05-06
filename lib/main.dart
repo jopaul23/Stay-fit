@@ -8,6 +8,7 @@ import 'package:stayfit/views/screens/home/home.dart';
 import 'package:stayfit/views/screens/registration/mobile/mobile_page.dart';
 
 import 'views/constants/constants.dart';
+import 'views/screens/list_friends/list_friends.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,

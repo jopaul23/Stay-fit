@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stayfit/views/constants/constants.dart';
 import 'package:stayfit/views/screens/home/home.dart';
 import 'package:stayfit/views/screens/registration/extra-details/extra_details.dart';
+import 'package:stayfit/views/screens/registration/otp/otp_verification.dart';
 import 'package:stayfit/views/wigdets/toast/toast.dart';
 
 const String baseUrl = "http://app.geekstudios.tech";
@@ -45,6 +46,11 @@ class RegisterApi {
             title: jsonDecode(response.body)["message"],
             description: "",
             icon: Icons.check);
+        Get.to(OtpPage(
+          mobile: mobile,
+          countryCode: countryCode,
+          passedOtp: jsonDecode(response.body)["response"]["otp"],
+        ));
         return 200;
       } else {
         showToast(

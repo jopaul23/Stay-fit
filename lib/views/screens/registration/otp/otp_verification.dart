@@ -11,13 +11,18 @@ import 'package:stayfit/views/wigdets/textfield_custom.dart';
 import '../../../wigdets/otp_textfield.dart';
 
 class OtpPage extends StatefulWidget {
-  const OtpPage({Key? key, required this.mobile, required this.countryCode})
+  const OtpPage(
+      {Key? key,
+      required this.mobile,
+      required this.countryCode,
+      required this.passedOtp})
       : super(key: key);
 
   @override
   _OtpPageState createState() => _OtpPageState();
   final String mobile;
   final String countryCode;
+  final String passedOtp;
 }
 
 class _OtpPageState extends State<OtpPage> {
@@ -110,7 +115,7 @@ class _OtpPageState extends State<OtpPage> {
                         int status = await RegisterApi.verificationApi(
                             mobile: widget.mobile,
                             countryCode: widget.countryCode,
-                            otp: token);
+                            otp: widget.passedOtp);
                       })
                 ]),
           ),

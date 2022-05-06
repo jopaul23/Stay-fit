@@ -49,13 +49,6 @@ class UserApi {
         },
       ).timeout(const Duration(seconds: 3));
 
-      debugPrint("------------status code------------");
-      debugPrint("${response.statusCode}");
-      debugPrint("st ${jsonDecode(response.body)["status_code"]}");
-      debugPrint("message ${jsonDecode(response.body)["message"]}");
-      debugPrint("response ${jsonDecode(response.body)}");
-
-      debugPrint("-----------------------------------");
       if (jsonDecode(response.body)["response_code"] == 200) {
         showToast(
             color: primaryPurple,
@@ -80,6 +73,50 @@ class UserApi {
     }
   }
 
+  static Future<List<UserSimplify>> getFriends(String id) async {
+    List<UserSimplify> friends = [];
+
+    String url = "http://app.geekstudios.tech/user/v1/request/get";
+    final uri = Uri.parse(url);
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? accessToken = pref.getString("token");
+    try {
+      http.Response response = await http.post(
+        uri,
+        body: jsonEncode({"id": id}),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $accessToken"
+        },
+      ).timeout(const Duration(seconds: 3));
+
+      if (jsonDecode(response.body)["response_code"] == 200) {
+        showToast(
+            color: primaryPurple,
+            context: Get.overlayContext!,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.check);
+        List<Map<String, dynamic>> decoded =
+            jsonDecode(response.body)["response"]["users"];
+
+        friends = decoded.map((e) => UserSimplify.fromJson(e)).toList();
+      } else {
+        showToast(
+            context: Get.overlayContext!,
+            color: Colors.orange,
+            title: jsonDecode(response.body)["message"],
+            description: "",
+            icon: Icons.warning);
+        // return;
+      }
+    } catch (e) {
+      debugPrint("Error occured while registering $e");
+      // return 501;
+    }
+    return friends;
+  }
+
   static Future<void> sendFriendRequest(String id) async {
     String url = "http://app.geekstudios.tech/user/v1/request/sent";
 
@@ -98,13 +135,6 @@ class UserApi {
         },
       ).timeout(const Duration(seconds: 3));
 
-      debugPrint("------------status code------------");
-      debugPrint("${response.statusCode}");
-      debugPrint("st ${jsonDecode(response.body)["status_code"]}");
-      debugPrint("message ${jsonDecode(response.body)["message"]}");
-      debugPrint("response ${jsonDecode(response.body)}");
-
-      debugPrint("-----------------------------------");
       if (jsonDecode(response.body)["response_code"] == 200) {
         showToast(
             color: primaryPurple,
@@ -144,14 +174,6 @@ class UserApi {
           "Authorization": "Bearer $accessToken"
         },
       ).timeout(const Duration(seconds: 3));
-
-      debugPrint("------------status code------------");
-      debugPrint("${response.statusCode}");
-      debugPrint("st ${jsonDecode(response.body)["status_code"]}");
-      debugPrint("message ${jsonDecode(response.body)["message"]}");
-      debugPrint("response ${jsonDecode(response.body)}");
-
-      debugPrint("-----------------------------------");
       if (jsonDecode(response.body)["response_code"] == 200) {
         showToast(
             color: primaryPurple,

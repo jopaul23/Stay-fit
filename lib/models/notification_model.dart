@@ -1,21 +1,25 @@
-import 'package:meta/meta.dart';
-import 'dart:convert';
+import 'package:stayfit/models/user_model.dart';
 
-class NotificaionModel {
-  NotificaionModel({
-    required this.title,
+class NotificationModel {
+  final String title;
+  final String type;
+  final String requestId;
+  NotificationModel(
+      {required this.title, required this.type, required this.requestId});
+}
+
+class NotificaionRequestModel extends NotificationModel {
+  NotificaionRequestModel({
+    required String title,
     required this.body,
-    required this.type,
-    required this.requestId,
-  });
+    required String type,
+    required String requestId,
+  }) : super(title: title, type: type, requestId: requestId);
 
-  String title;
   String body;
-  String type;
-  String requestId;
 
-  factory NotificaionModel.fromMap(Map<String, dynamic> json) =>
-      NotificaionModel(
+  factory NotificaionRequestModel.fromMap(Map<String, dynamic> json) =>
+      NotificaionRequestModel(
         title: json["title"],
         body: json["body"],
         type: json["type"],
@@ -25,6 +29,29 @@ class NotificaionModel {
   Map<String, dynamic> toMap() => {
         "title": title,
         "body": body,
+        "type": type,
+        "request_id": requestId,
+      };
+}
+
+class NotificaionChallengeModel extends NotificationModel {
+  NotificaionChallengeModel({
+    required this.oponent,
+    required String type,
+    required String requestId,
+  }) : super(title: "", type: type, requestId: requestId);
+
+  final UserModel oponent;
+  factory NotificaionChallengeModel.fromMap(
+          Map<String, dynamic> json, UserModel oponent) =>
+      NotificaionChallengeModel(
+        oponent: oponent,
+        type: json["type"],
+        requestId: json["request_id"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "title": title,
         "type": type,
         "request_id": requestId,
       };

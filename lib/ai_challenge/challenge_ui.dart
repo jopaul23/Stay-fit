@@ -1,12 +1,15 @@
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
-import 'controller.dart';
-import 'counter.dart';
+import 'package:lottie/lottie.dart';
+import 'package:stayfit/ai_challenge/workout.dart';
+
+import '../views/constants/constants.dart';
 
 class FriendlyChallenge extends StatelessWidget {
-  const FriendlyChallenge({Key? key}) : super(key: key);
+  final String opponent;
+  const FriendlyChallenge({Key? key, required this.opponent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,7 @@ class FriendlyChallenge extends StatelessWidget {
                                   height: 20,
                                 ),
                                 Text(
-                                  "Naigal",
+                                  "You",
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -93,8 +96,8 @@ class FriendlyChallenge extends StatelessWidget {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Text(
-                                  "Pranav",
+                                Text(
+                                  opponent,
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
@@ -105,7 +108,7 @@ class FriendlyChallenge extends StatelessWidget {
                                   height: 10,
                                 ),
                                 const Text(
-                                  "Ready",
+                                  "Waiting",
                                   style: TextStyle(
                                       color: Colors.green,
                                       fontSize: 20,
@@ -118,22 +121,17 @@ class FriendlyChallenge extends StatelessWidget {
                         const SizedBox(
                           height: 50,
                         ),
-                        Column(
-                          children: [
-                            Text(
-                              "Waiting",
-                              style: const TextStyle(
-                                  color: Color(0xFF00346b),
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            LottieBuilder.asset(
-                              "assets/lotties/wave.json",
-                              height: 100,
-                              width: 100,
-                            )
-                          ],
-                        )
+                        CircularCountDownTimer(
+                          width: 70,
+                          height: 70,
+                          duration: 10,
+                          isReverse: true,
+                          fillColor: primaryPurple,
+                          ringColor: Colors.grey[300]!,
+                          onComplete: () {
+                            Get.to(const WorkoutPage());
+                          },
+                        ),
                       ]),
                 ),
               )
