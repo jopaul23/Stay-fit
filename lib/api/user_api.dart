@@ -10,15 +10,31 @@ import 'package:stayfit/views/constants/constants.dart';
 
 import '../views/wigdets/toast/toast.dart';
 
-// class UserSimplify {
-//   final String name;
-//   final List profile;
-//   final
-// }
+//{"response_code":200,"message":"Profile fetched successfully.","response":{"users":[{"_id":"6274b707df4512cc10c5ebe0","name":"joyal","profile_images":[],"username":"joyal"},{"_id":"6274b642df4512cc10c5ebd2","name":"Pranav V","profile_images":[],"username":"pranav"}]}}
+
+class UserSimplify {
+  final String id;
+  final String name;
+  final List profiles;
+  final String username;
+
+  UserSimplify(
+      {required this.id,
+      required this.name,
+      required this.profiles,
+      required this.username});
+
+  factory UserSimplify.fromJson(Map<String, dynamic> json) => UserSimplify(
+      id: json["_id"],
+      name: json["name"],
+      profiles: json["profile_images"],
+      username: json["username"]);
+}
 
 class UserApi {
   //
-  static getUser({required ProfileController profileController}) async {
+  static Future<void> getUser(
+      {required ProfileController profileController}) async {
     String url = "http://app.geekstudios.tech/user/v1/profile/get";
     print("url $url");
     final uri = Uri.parse(url);
@@ -67,7 +83,7 @@ class UserApi {
     }
   }
 
-  static Future<List<UserModel>> getNearbyUsers(String km) async {
+  static Future<List<UserSimplify>> getNearbyUsers(String km) async {
     String url =
         "http://app.geekstudios.tech/user/v1/profile/get/nearby-users/$km";
     final uri = Uri.parse(url);
@@ -75,7 +91,7 @@ class UserApi {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? accessToken = pref.getString("token");
     print(accessToken);
-    List<UserModel> users = [];
+    List<UserSimplify> users = [];
     try {
       http.Response response = await http.get(
         uri,
@@ -95,7 +111,8 @@ class UserApi {
             icon: Icons.check);
 
         final List a = jsonDecode(response.body)["response"]["users"];
-        users = a.map((e) => UserModel.fromMap(e)).toList();
+        print(a);
+        users = a.map((e) => UserSimplify.fromJson(e)).toList();
       } else {
         showToast(
             context: Get.overlayContext!,

@@ -14,11 +14,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  ProfileController profileController = Get.put(ProfileController());
+  ProfileController profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    UserApi.getUser(profileController: profileController);
+
     return SafeArea(
       child: Scaffold(
         appBar: appBarCustom(title: "profile"),

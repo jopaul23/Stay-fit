@@ -9,7 +9,7 @@ class TrainerChatController extends GetxController {
   late StreamController streamController;
   final String user = "jopi";
   TrainerChatController() {
-    channel = IOWebSocketChannel.connect("ws://10.100.24.187:5003");
+    channel = IOWebSocketChannel.connect("ws://159.89.161.168:5003");
     streamController = StreamController.broadcast();
     streamController.addStream(channel.stream);
     channel.sink.add(jsonEncode({

@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:stayfit/views/screens/find_near_friends.dart/find_friends.dart';
 import 'package:stayfit/views/screens/home/home.dart';
 import 'package:stayfit/views/screens/registration/mobile/mobile_page.dart';
 
@@ -111,7 +112,7 @@ class _MyappState extends State<Myapp> {
         color: primaryPurple,
         fontWeight: FontWeight.w500,
       ),
-      child: GetMaterialApp(home: MobileEntry()),
+      child: GetMaterialApp(home: HomePage()),
     );
   }
 }

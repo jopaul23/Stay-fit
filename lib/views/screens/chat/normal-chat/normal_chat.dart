@@ -20,11 +20,7 @@ class _NormalChatState extends State<NormalChat> {
   TextEditingController textEditingController = TextEditingController();
   FocusNode focus = FocusNode();
 
-  List<MessageModel> messages = [
-    MessageModel(from: "jopi", to: "naigal", message: "Hii Sir,\nGood morning"),
-    MessageModel(from: "naigal", to: "jopi", message: "Hii Jopaul"),
-    MessageModel(from: "naigal", to: "jopi", message: "GM"),
-  ];
+  List<MessageModel> messages = [];
   late String chatId;
   late TrainerChatController chatController;
   @override
@@ -37,11 +33,21 @@ class _NormalChatState extends State<NormalChat> {
     chatController.streamController.stream.listen((event) {
       final data = jsonDecode(event);
       if (data["command"] == "get_message") {
+        print(data["result"]["messages"].length);
         chatId = data["result"]["_id"];
-        print(chatId);
+        for (var msg in data["result"]["messages"]) {
+          messages.add(MessageModel.fromMap(msg));
+        }
       }
     });
     chatController.getMessages("naigal");
+  }
+
+  @override
+  void dispose() {
+    //chatController.streamController.close();
+
+    super.dispose();
   }
 
   @override
@@ -60,6 +66,7 @@ class _NormalChatState extends State<NormalChat> {
                     if (snapshot.hasData) {
                       parseData(jsonDecode(snapshot.data.toString()));
                       return ListView.builder(
+                        reverse: true,
                         itemCount: messages.length,
                         itemBuilder: (context, index) {
                           bool isSender = messages[index].from == "jopi";
